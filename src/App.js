@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
 import './reset.css';
 import './App.css';
-
+// import ChangeText from './ChangeText';
 // import {Jumbotron} from 'react-bootstrap';
 // import SearchForm from './components/SearchForm';
 // import Results from './components/Results';
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
   render() {
     return (
       // <div>
@@ -53,8 +66,9 @@ class App extends Component {
   <section className="main">
     {/* Start Welcome Message */}
     <div className="welcome givePadding bg-color-blue">
+
       <div className="container">
-        <h1 id="welcome-text-change" onclick="changeText()" className="u-text-center welcome-text u-pointer">Welcome Message</h1>
+        <h1 id="welcome-text-change" onClick={this.handleClick} className="u-text-center welcome-text u-pointer">{this.state.isToggleOn ? 'Welcome Message' : 'Have A Goog Time'}</h1>
       </div>
     </div>
     {/* End Welcome Message */}
